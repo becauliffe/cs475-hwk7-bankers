@@ -58,26 +58,30 @@ int main(int argc, char *argv[])
     printf("Integrity test failed: allocated resources exceed demand for Thread 2\n");
     return 1;
   }
-  allSafe(available, allocated, need, numThreads, numResources);
-  // order = isSafe(available, allocated, need, order, numThreads, numResources);
+  // This is the extra credit uncomment this and
+  // allSafe(available, allocated, need, numThreads, numResources);
+  // comment out the below code from here
 
-  // if (order[0] == -1)
-  // {
-  //   printf("UNSAFE: ");
-  //   int i = 1;
-  //   while (order[i] != -1)
-  //   {
-  //     printf("T%d ", order[i++]);
-  //   }
-  //   printf("cant finish\n");
-  //   return 0;
-  // }
-  // printf("SAFE: ");
-  // for (int threadNum = 0; threadNum < numThreads; threadNum++)
-  // {
-  //   printf("T%d ", order[threadNum]);
-  // }
-  // printf("\n");
+  order = isSafe(available, allocated, need, order, numThreads, numResources);
+
+  if (order[0] == -1)
+  {
+    printf("UNSAFE: ");
+    int i = 1;
+    while (order[i] != -1)
+    {
+      printf("T%d ", order[i++]);
+    }
+    printf("cant finish\n");
+    return 0;
+  }
+  printf("SAFE: ");
+  for (int threadNum = 0; threadNum < numThreads; threadNum++)
+  {
+    printf("T%d ", order[threadNum]);
+  }
+  printf("\n");
+  // to here and it should work
 
   // cleanup
   fclose(fp);
